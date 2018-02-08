@@ -1,7 +1,0 @@
-{
-    "host": "den1.mysql3.gear.host ",
-    "port": "3306",
-    "user": "sbg",
-    "password": "need_pants",
-    "db": "sbg_db"
-}
