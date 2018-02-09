@@ -1,3 +1,4 @@
 *.dev
 *.json
+*.pyc
 _pycache_
