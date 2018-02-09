@@ -11,7 +11,7 @@ api = Api(app)
 
 #Add route to api with functionality in specified class
 api.add_resource(BikeUsageSelectQuery, '/')
-api.add_resource(LoginQuery, '/auth/<username>/<password>')
+api.add_resource(LoginQuery, '/auth', endpoint='auth')
 
 if __name__ == '__main__':
     app.run(debug=True)
