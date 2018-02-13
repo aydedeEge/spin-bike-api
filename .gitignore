@@ -2,3 +2,4 @@
 *.json
 *.pyc
 _pycache_
+*.js

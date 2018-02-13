@@ -1,6 +1,7 @@
 #Imported libraries
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_cors import CORS
 
 #Imported local files
 from bike_usage_select import BikeUsageSelectQuery
@@ -9,6 +10,7 @@ from account_creation_insert import AccountCreationInsertQuery
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 #Add route to api with functionality in specified class
 api.add_resource(BikeUsageSelectQuery, '/')
