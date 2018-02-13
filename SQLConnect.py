@@ -32,7 +32,6 @@ class SQLConn:
         connection = self.connect()
         try:
             with connection.cursor() as cursor:
-                sql = "SELECT * FROM `spin_bikes` LIMIT 5"
                 cursor.execute(select_query)
                 result = cursor.fetchall()
             connection.commit()
@@ -42,17 +41,11 @@ class SQLConn:
 
         return result
 
-#This an example of a Select query using PyMySQL
-    # def test_query(self):
-    #     connection = self.connect()
-    #     try:
-    #         with connection.cursor() as cursor:
-    #             sql = "SELECT * FROM `spin_bikes` LIMIT 5"
-    #             cursor.execute(sql)
-    #             result = cursor.fetchall()
-    #         connection.commit()
-
-    #     finally:
-    #         connection.close()
-
-    #     return result
+    def insert_query(self, insert_query):
+        connection = self.connect()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(insert_query)
+            connection.commit()
+        finally:
+            connection.close()
