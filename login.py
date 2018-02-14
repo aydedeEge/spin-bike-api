@@ -21,8 +21,8 @@ class LoginQuery(Resource):
         #check if user exista and password matches
         if(len(result) == 1):
             if(result[0]['pwd'] == password):
-                return 'yes'
-        return 'no'
+                return True
+        return False
 
 
 
