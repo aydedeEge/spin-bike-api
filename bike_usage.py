@@ -5,7 +5,7 @@ from flask_restful import Resource
 from SQLConnect import SQLConn
 
 
-class BikeUsageSelectQuery(Resource):
+class BikeUsageAll(Resource):
     def __init__(self):
         self.sql = SQLConn()
 
@@ -16,13 +16,13 @@ class BikeUsageSelectQuery(Resource):
     def get_bikes(self, bike_ids):
         #query bikes info
         BIKE_INFO = "SELECT * FROM `spin_bikes` WHERE sb_id = " + str(
-            bikes_ids[0])
-        for bike_id in bikes_ids[1:]:
+            bike_ids[0])
+        for bike_id in bike_ids[1:]:
             BIKE_INFO += ("," + str(bike_id))
         bikes_info = self.sql.select_query(BIKE_INFO)
         return bikes_info
 
-    def get_locations(sel, location_ids):
+    def get_locations(self, location_ids):
         #query location info
         LOCATION_INFO = "SELECT * FROM `location` WHERE l_id = " + str(
             location_ids[0])
@@ -42,7 +42,7 @@ class BikeUsageSelectQuery(Resource):
             bike_usage_dict[b_id] = list(g)
         bikes_ids = list(bike_usage_dict.keys())
 
-        bikes_info = self.get_bikes()  #get the needed bikes
+        bikes_info = self.get_bikes(bikes_ids)  #get the needed bikes
 
         #group bikes by location id to know which locations need to be queried
         location_dict = {}
