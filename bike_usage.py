@@ -5,13 +5,20 @@ from flask_restful import Resource
 from SQLConnect import SQLConn
 
 
+def datetime_converter(date):
+    if isinstance(date, datetime.datetime):
+        return date.__str__()
+
+
+#functions that convert a datetime type in a dictionnay into a string to be returnable in json
+def convert_dict_datetime_str(list_dict, dict_key):
+    for dict_to_change in list_dict:
+        dict_to_change[dict_key] = datetime_converter(dict_to_change[dict_key])
+
+
 class BikeUsageAll(Resource):
     def __init__(self):
         self.sql = SQLConn()
-
-    def datetime_converter(self, date):
-        if isinstance(date, datetime.datetime):
-            return date.__str__()
 
     def get_bikes(self, bike_ids):
         #query bikes info
@@ -36,6 +43,9 @@ class BikeUsageAll(Resource):
         ALL_BIKE_USAGE = "SELECT * FROM `bike_usage`"
         bike_usage_entries = self.sql.select_query(ALL_BIKE_USAGE)
 
+        convert_dict_datetime_str(
+            bike_usage_entries, 'start_time')  #cast date type to str for json
+
         #group usage entries by bike_id to know which bikes need to be queried
         bike_usage_dict = {}
         for b_id, g in groupby(bike_usage_entries, lambda x: x['sb_id']):
@@ -43,6 +53,9 @@ class BikeUsageAll(Resource):
         bikes_ids = list(bike_usage_dict.keys())
 
         bikes_info = self.get_bikes(bikes_ids)  #get the needed bikes
+
+        convert_dict_datetime_str(
+            bikes_info, 'last_battery_change')  #cast date type to str for json
 
         #group bikes by location id to know which locations need to be queried
         location_dict = {}
@@ -61,7 +74,4 @@ class BikeUsageAll(Resource):
         for location in location_info:
             location['bikes'] = location_dict[location[
                 'l_id']]  # add the bikes to the location dictionnary
-
-        bike_usage_entries = json.dumps(
-            location_info, default=self.datetime_converter)
-        return bike_usage_entries
+        return location_info
