@@ -16,13 +16,13 @@ class LoginQuery(Resource):
         username = args['username']
         password = args['pwd']
         #form request to db
-        GET_PASSWORD="SELECT pwd FROM `bike_manager` WHERE bm_name='"+username+"'"
+        GET_PASSWORD="SELECT pwd FROM `bike_manager` WHERE  email='"+username+"' OR bm_name='"+username+"'"
         result = self.sql.select_query(GET_PASSWORD)  
         #check if user exista and password matches
         if(len(result) == 1):
             if(result[0]['pwd'] == password):
-                return 'yes'
-        return 'no'
+                return True
+        return False
 
 
 
