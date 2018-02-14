@@ -15,10 +15,10 @@ class BikeUsageAll(Resource):
 
     def get_bikes(self, bike_ids):
         #query bikes info
-        BIKE_INFO = "SELECT * FROM `spin_bikes` WHERE sb_id = " + str(
+        BIKE_INFO = "SELECT * FROM `spin_bikes` WHERE sb_id =" + str(
             bike_ids[0])
         for bike_id in bike_ids[1:]:
-            BIKE_INFO += ("," + str(bike_id))
+            BIKE_INFO += (" OR sb_id =" + str(bike_id))
         bikes_info = self.sql.select_query(BIKE_INFO)
         return bikes_info
 
@@ -27,7 +27,7 @@ class BikeUsageAll(Resource):
         LOCATION_INFO = "SELECT * FROM `location` WHERE l_id = " + str(
             location_ids[0])
         for location_id in location_ids[1:]:
-            LOCATION_INFO += ("," + str(location_id))
+            LOCATION_INFO += (" OR l_id =" + str(location_id))
         location_info = self.sql.select_query(LOCATION_INFO)
         return location_info
 
