@@ -17,4 +17,4 @@ class UsageByIDSelect(Resource):
         SELECT = "SELECT * FROM `bike_usage` WHERE `sb_id`={bike_id}".format(bike_id=bike_id)
         result = self.sql.select_query(SELECT)
         result = json.dumps(result, default=self.to_serializable)
-        return results
+        return result
