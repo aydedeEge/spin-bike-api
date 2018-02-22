@@ -8,7 +8,6 @@ from login import LoginQuery
 from bike_usage import BikeUsageAll
 from checklist import ChecklistQuery
 from usage_by_id import UsageByIDSelect
-from bike_usage_select import BikeUsageSelectQuery
 from account_creation_insert import AccountCreationInsertQuery
 
 app = Flask(__name__)
