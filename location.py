@@ -12,7 +12,9 @@ class LocationQuery(Resource):
         self.sql = SQLConn()
 
     def get(self):
-        args = request.args
+        SELECT_QUERY="SELECT * FROM location"
+        result = self.sql.select_query(SELECT_QUERY)  
+        return result
 
 
 

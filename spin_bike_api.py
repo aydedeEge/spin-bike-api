@@ -5,7 +5,8 @@ from flask_restful import Resource, Api
 
 #Imported local files
 from login import LoginQuery
-from location import locationQuery
+from location import LocationQuery
+from spinbike import SpinBikeQuery
 from bike_usage import BikeUsageAll
 from checklist import ChecklistQuery
 from usage_by_id import UsageByIDSelect

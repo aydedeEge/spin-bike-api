@@ -1,6 +1,3 @@
-import json
-import datetime
-
 from flask_restful import Resource, request
 from flask_httpauth import HTTPBasicAuth
 from SQLConnect import SQLConn
@@ -12,5 +9,6 @@ class SpinBikeQuery(Resource):
         self.sql = SQLConn()
 
     def get(self):
-        args = request.args
-
+        SELECT_QUERY="SELECT sb_id, make, l_id, model, data_collector FROM spin_bikes"
+        result = self.sql.select_query(SELECT_QUERY)  
+        return result
