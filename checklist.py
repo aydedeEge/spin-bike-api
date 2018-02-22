@@ -61,7 +61,7 @@ class ChecklistQuery(Resource):
         result = self.sql.insert_query(INSERT_QUERY)
 
         # insert into bike_state table
-        INSERT_QUERY = "INSERT INTO bike_state ({m_id}, {sb_id}, {comp_state})".format(
+        INSERT_QUERY = "INSERT INTO bike_state VALUES ({m_id}, {sb_id}, {comp_state})".format(
             m_id=m_id,
             sb_id=sb_id,
             comp_state=comp_state)
