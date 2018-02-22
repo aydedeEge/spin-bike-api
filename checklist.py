@@ -12,6 +12,9 @@ class ChecklistQuery(Resource):
         self.sql = SQLConn()
 
     def getID(self):
+        """
+            Find the largest m_id and return max(m_id) incremented by 1
+        """
         SELECT_QUERY = "SELECT max(m_id) FROM maintenance"
         result = self.sql.select_query(SELECT_QUERY)
         print(result)
@@ -22,6 +25,9 @@ class ChecklistQuery(Resource):
 
 
     def get(self):
+        """
+            Insert the request 
+        """
         args = request.args
         m_id = self.getID()
         maintenance_time = datetime.datetime.now()
@@ -39,7 +45,7 @@ class ChecklistQuery(Resource):
         done = args['done']
 
         args = request.args
-        INSERT_QUERY = "insert into maintenance values ({m_id},'{date}', {bm_id}, {l_id}, {plants}, {clean}, {comments}, {done})".format(
+        INSERT_QUERY = "INSERT INTO maintenance VALUES ({m_id},'{date}', {bm_id}, {l_id}, {plants}, {clean}, {comments}, {done})".format(
             m_id=m_id,
             date=maintenance_time,
             bm_id=bm_id,
