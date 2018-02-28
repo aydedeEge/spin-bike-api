@@ -5,7 +5,6 @@ from flask_restful import Resource
 from SQLConnect import SQLConn
 
 
-#todo get out in util
 def get_locations(sql, location_ids):
     #query location info
     LOCATION_INFO = "SELECT * FROM `location` WHERE l_id = " + str(
@@ -20,6 +19,6 @@ class Location(Resource):
     def __init__(self):
         self.sql = SQLConn()
 
-    def get(self ,l_id):
-        location_info = get_locations(self.sql,(l_id))
+    def get(self, l_id):
+        location_info = get_locations(self.sql, (l_id))
         return location_info[0]
