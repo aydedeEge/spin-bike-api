@@ -3,6 +3,7 @@ import datetime
 from itertools import groupby
 from flask_restful import Resource
 from SQLConnect import SQLConn
+from location import get_locations
 
 
 def datetime_converter(date):
@@ -29,15 +30,6 @@ class BikeUsageAll(Resource):
         bikes_info = self.sql.select_query(BIKE_INFO)
         return bikes_info
 
-    def get_locations(self, location_ids):
-        #query location info
-        LOCATION_INFO = "SELECT * FROM `location` WHERE l_id = " + str(
-            location_ids[0])
-        for location_id in location_ids[1:]:
-            LOCATION_INFO += (" OR l_id =" + str(location_id))
-        location_info = self.sql.select_query(LOCATION_INFO)
-        return location_info
-
     def get(self):
         #obtain total usage right away and goes backwards to locations
         ALL_BIKE_USAGE = "SELECT * FROM `bike_usage`"
@@ -63,9 +55,9 @@ class BikeUsageAll(Resource):
             location_dict[l_id] = list(g)
         location_ids = list(location_dict.keys())
 
-        location_info = self.get_locations(
-            location_ids)  #get the needed locations
-
+        location_info = get_locations(self.sql,
+                                      location_ids)  #get the needed locations
+        print(len(location_info))
         #Build the dictionnary object to dump to a json object
         for bike in bikes_info:
             bike['usage'] = bike_usage_dict[bike[
