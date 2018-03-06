@@ -11,6 +11,7 @@ from usage_by_id import UsageByIDSelect
 from managers import Managers
 from schedule import ScheduleAll, Schedule
 from location import Location
+from update_schedule import UpdateSchedule
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,6 +26,7 @@ api.add_resource(Managers, '/managers')
 api.add_resource(ScheduleAll, '/schedule_all')
 api.add_resource(Schedule, '/schedule/<bm_id>')
 api.add_resource(Location, '/location/<l_id>')
+api.add_resource(UpdateSchedule, '/update_schedule')
 
 if __name__ == '__main__':
     app.run(debug=True)
