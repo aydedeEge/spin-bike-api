@@ -8,14 +8,11 @@ from bike_usage import BikeUsageAll
 from login import LoginQuery
 from account_creation_insert import AccountCreationInsertQuery
 from usage_by_id import UsageByIDSelect
-<<<<<<< Updated upstream
 from managers import Managers
 from schedule import ScheduleAll, Schedule
 from location import Location
 from update_schedule import UpdateSchedule, RemoveSchedule
-=======
 from bike_logs import BikeLogs
->>>>>>> Stashed changes
 
 app = Flask(__name__)
 api = Api(app)
@@ -26,16 +23,13 @@ api.add_resource(BikeUsageAll, '/')
 api.add_resource(LoginQuery, '/auth', endpoint='auth')
 api.add_resource(AccountCreationInsertQuery, '/create')
 api.add_resource(UsageByIDSelect, '/usage/<bike_id>')
-<<<<<<< Updated upstream
 api.add_resource(Managers, '/managers')
 api.add_resource(ScheduleAll, '/schedule_all')
 api.add_resource(Schedule, '/schedule/<bm_id>')
 api.add_resource(Location, '/location/<l_id>')
 api.add_resource(UpdateSchedule, '/update_schedule')
 api.add_resource(RemoveSchedule, '/delete_schedule')
-=======
 api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 
->>>>>>> Stashed changes
 if __name__ == '__main__':
     app.run(debug=True)
