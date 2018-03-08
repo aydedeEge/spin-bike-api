@@ -27,3 +27,12 @@ class AccountCreationInsertQuery(Resource):
         except Exception as e:
             return False
         return True
+
+    def get(self):
+        data = request.form['data']
+        data = json.loads(data)
+        GET_EMAIL = "SELECT email FROM 'bike_manager' WHERE email='" +email +"'"
+        result = self.sql.select_query(GET_EMAIL)
+        if(len(result) == 1):
+          return True
+        return False
