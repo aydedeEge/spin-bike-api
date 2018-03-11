@@ -24,7 +24,7 @@ class ChecklistQuery(Resource):
             return 1
 
 
-    def get(self):
+    def post(self):
         """
             Insert the request 
         """
@@ -48,7 +48,10 @@ class ChecklistQuery(Resource):
         clean = args['clean']
         comments = args['comments']
         done = args['done']
-        sb_ids = args['sb_ids']
+        
+        print(args['sb_ids'])
+        sb_ids = json.loads(args['sb_ids'])
+        print(type(sb_ids))
 
         # insert into mainteance table
         INSERT_QUERY = "INSERT INTO maintenance VALUES ({m_id},'{date}', {bm_id}, {l_id}, {plants}, {clean}, '{comments}', {done})".format(
