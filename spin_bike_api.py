@@ -1,16 +1,18 @@
 #Imported libraries
 from flask import Flask
-from flask_restful import Resource, Api
 from flask_cors import CORS
+from flask_restful import Resource, Api
 
 #Imported local files
-from bike_usage import BikeUsageAll
 from login import LoginQuery
-from account_creation_insert import AccountCreationInsertQuery
+from spinbike import SpinBikeQuery
+from bike_usage import BikeUsageAll
+from checklist import ChecklistQuery
 from usage_by_id import UsageByIDSelect
+from account_creation_insert import AccountCreationInsertQuery
 from managers import Managers
 from schedule import ScheduleAll, Schedule
-from location import Location
+from location import Location, LocationQuery
 from update_schedule import UpdateSchedule, RemoveSchedule
 from bike_logs import BikeLogs
 
@@ -22,6 +24,9 @@ CORS(app)
 api.add_resource(BikeUsageAll, '/')
 api.add_resource(LoginQuery, '/auth', endpoint='auth')
 api.add_resource(AccountCreationInsertQuery, '/create')
+api.add_resource(ChecklistQuery, '/checklist')
+api.add_resource(LocationQuery, '/location')
+api.add_resource(SpinBikeQuery, '/spinbike')
 api.add_resource(UsageByIDSelect, '/usage/<bike_id>')
 api.add_resource(Managers, '/managers')
 api.add_resource(ScheduleAll, '/schedule_all')
