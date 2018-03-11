@@ -19,13 +19,12 @@ class BikeLogs(Resource):
         
         LOG_DATA = """
             SELECT 
-                l.l_id, 
-                l.address, 
-                s.sb_id, 
-                s.model,
-                m.bm_id, 
-                SUM(bu.duration),
-                COUNT(bu.duration)
+                l.l_id as Location_ID, 
+                l.address as Address, 
+                s.sb_id as Bike_ID, 
+                s.model as Bike_Model,
+                SUM(bu.duration) as Total_Usage,
+                COUNT(bu.duration) as Usage_Instances
             FROM 
                 `location` l 
             JOIN 
@@ -48,8 +47,7 @@ class BikeLogs(Resource):
                 l.l_id, 
                 l.address, 
                 s.sb_id, 
-                s.model,
-                m.bm_id;
+                s.model;
         """.format(start_date=start_date, end_date=end_date)
         result = self.sql.select_query(LOG_DATA)
         result = json.dumps(result, default=self.decimal_default)
