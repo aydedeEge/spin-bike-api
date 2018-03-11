@@ -5,12 +5,16 @@ from flask_restful import Resource, Api
 
 #Imported local files
 from login import LoginQuery
-from location2 import LocationQuery
 from spinbike import SpinBikeQuery
 from bike_usage import BikeUsageAll
 from checklist import ChecklistQuery
 from usage_by_id import UsageByIDSelect
 from account_creation_insert import AccountCreationInsertQuery
+from managers import Managers
+from schedule import ScheduleAll, Schedule
+from location import Location, LocationQuery
+from update_schedule import UpdateSchedule, RemoveSchedule
+from bike_logs import BikeLogs
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,7 +28,13 @@ api.add_resource(ChecklistQuery, '/checklist')
 api.add_resource(LocationQuery, '/location')
 api.add_resource(SpinBikeQuery, '/spinbike')
 api.add_resource(UsageByIDSelect, '/usage/<bike_id>')
-
+api.add_resource(Managers, '/managers')
+api.add_resource(ScheduleAll, '/schedule_all')
+api.add_resource(Schedule, '/schedule/<bm_id>')
+api.add_resource(Location, '/location/<l_id>')
+api.add_resource(UpdateSchedule, '/update_schedule')
+api.add_resource(RemoveSchedule, '/delete_schedule')
+api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 
 if __name__ == '__main__':
     app.run(debug=True)
