@@ -19,7 +19,8 @@ class Managers(Resource):
 
         #group managers by caretakers or admin
         managers_dict = {}
+        all_managers_entries = sorted(all_managers_entries, key=lambda x: x['role'])
         for role, g in groupby(all_managers_entries, lambda x: x['role']):
             managers_dict[role] = list(g)
-
+        print(managers_dict)
         return managers_dict

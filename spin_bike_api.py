@@ -15,6 +15,7 @@ from schedule import ScheduleAll, Schedule
 from location import Location, LocationQuery
 from update_schedule import UpdateSchedule, RemoveSchedule
 from bike_logs import BikeLogs
+from maintenance import Maintenance
 
 app = Flask(__name__)
 api = Api(app)
@@ -35,6 +36,7 @@ api.add_resource(Location, '/location/<l_id>')
 api.add_resource(UpdateSchedule, '/update_schedule')
 api.add_resource(RemoveSchedule, '/delete_schedule')
 api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
+api.add_resource(Maintenance, '/maintenance/<bm_id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
