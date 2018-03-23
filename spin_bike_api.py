@@ -16,6 +16,8 @@ from location import Location, LocationQuery
 from update_schedule import UpdateSchedule, RemoveSchedule
 from bike_logs import BikeLogs
 from maintenance import Maintenance
+from edit_account import EditAccount, EditAccountUser
+from user_validation import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser
 from hardware import Hardware
 
 app = Flask(__name__)
@@ -38,6 +40,12 @@ api.add_resource(UpdateSchedule, '/update_schedule')
 api.add_resource(RemoveSchedule, '/delete_schedule')
 api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 api.add_resource(Maintenance, '/maintenance/<bm_id>')
+api.add_resource(EditAccount, '/edit')
+api.add_resource(EditAccountUser, '/edit/<bm_id>')
+api.add_resource(EmailExists, '/check_email/<email>')
+api.add_resource(EmailExistsOtherUser, '/check_email/<email>&<bm_id>')
+api.add_resource(NameExists, '/check_name/<bm_name>')
+api.add_resource(NameExistsOtherUser, '/check_name/<bm_name>&<bm_id>')
 api.add_resource(Hardware, '/hardware')
 
 if __name__ == '__main__':
