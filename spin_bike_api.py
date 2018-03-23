@@ -18,6 +18,7 @@ from bike_logs import BikeLogs
 from maintenance import Maintenance
 from edit_account import EditAccount, EditAccountUser
 from user_validation import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser
+from hardware import Hardware
 
 app = Flask(__name__)
 api = Api(app)
@@ -45,7 +46,7 @@ api.add_resource(EmailExists, '/check_email/<email>')
 api.add_resource(EmailExistsOtherUser, '/check_email/<email>&<bm_id>')
 api.add_resource(NameExists, '/check_name/<bm_name>')
 api.add_resource(NameExistsOtherUser, '/check_name/<bm_name>&<bm_id>')
-
+api.add_resource(Hardware, '/hardware')
 
 if __name__ == '__main__':
     app.run(debug=True)
