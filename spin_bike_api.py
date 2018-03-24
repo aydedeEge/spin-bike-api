@@ -9,15 +9,13 @@ from spinbike import SpinBikeQuery
 from bike_usage import BikeUsageAll
 from checklist import ChecklistQuery
 from usage_by_id import UsageByIDSelect
-from account_creation_insert import AccountCreationInsertQuery
 from managers import Managers
 from schedule import ScheduleAll, Schedule
 from location import Location, LocationQuery
 from update_schedule import UpdateSchedule, RemoveSchedule
 from bike_logs import BikeLogs
 from maintenance import Maintenance
-from edit_account import EditAccount, EditAccountUser
-from user_validation import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser
+from users import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser, ReturnUser, ReturnUserNamesAndIDs, CreateUser, EditUser
 from hardware import Hardware
 
 app = Flask(__name__)
@@ -27,7 +25,6 @@ CORS(app)
 #Add route to api with functionality in specified class
 api.add_resource(BikeUsageAll, '/')
 api.add_resource(LoginQuery, '/auth', endpoint='auth')
-api.add_resource(AccountCreationInsertQuery, '/create')
 api.add_resource(ChecklistQuery, '/checklist')
 api.add_resource(LocationQuery, '/location')
 api.add_resource(SpinBikeQuery, '/spinbike')
@@ -40,13 +37,17 @@ api.add_resource(UpdateSchedule, '/update_schedule')
 api.add_resource(RemoveSchedule, '/delete_schedule')
 api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 api.add_resource(Maintenance, '/maintenance/<bm_id>')
-api.add_resource(EditAccount, '/edit')
-api.add_resource(EditAccountUser, '/edit/<bm_id>')
-api.add_resource(EmailExists, '/check_email/<email>')
-api.add_resource(EmailExistsOtherUser, '/check_email/<email>&<bm_id>')
-api.add_resource(NameExists, '/check_name/<bm_name>')
-api.add_resource(NameExistsOtherUser, '/check_name/<bm_name>&<bm_id>')
-api.add_resource(Hardware, '/hardware')
+
+#These route to users.py
+api.add_resource(ReturnUserNamesAndIDs, '/users/get_usernames_and_ids')
+api.add_resource(ReturnUser, '/users/get_user/<bm_id>')
+api.add_resource(EmailExists, '/users/check_email/<email>')
+api.add_resource(EmailExistsOtherUser, '/users/check_email/<email>&<bm_id>')
+api.add_resource(NameExists, '/users/check_name/<bm_name>')
+api.add_resource(NameExistsOtherUser, '/users/check_name/<bm_name>&<bm_id>')
+api.add_resource(CreateUser, '/users/create_user')
+api.add_resource(EditUser, '/users/edit_user')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
