@@ -20,7 +20,7 @@ from users import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOther
 from hardware import Hardware
 from image_transfer import UploadImage
 
-UPLOAD_FOLDER = '/image/'
+UPLOAD_FOLDER = './images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
