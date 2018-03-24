@@ -49,3 +49,12 @@ class SQLConn:
             connection.commit()
         finally:
             connection.close()
+
+    def update_query(self, update_query):
+        connection = self.connect()
+        try:
+            with connection.cursor() as cursor:
+                 cursor.execute(update_query)
+            connection.commit()
+        finally:
+            connection.close()

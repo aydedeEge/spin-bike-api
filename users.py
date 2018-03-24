@@ -107,12 +107,12 @@ class EditUser(Resource):
         self.sql = SQLConn()
 
     def put(self):
-        data = request.form['data']
-        data = json.loads(data)
-        UPDATE_USER = "UPDATE `bike_manager` SET email='" +data["email"] +"', pwd='" +data["pwd"] +"', bm_name='" +data["bm_name"] +"', role='" +data["role"] +"' WHERE bm_id ='" +bm_id +"'"
         
         try:
-            request = self.sql.update_query(UPDATE_USER);
+            data = request.form['data']
+            data = json.loads(data)
+            UPDATE_USER = "UPDATE `bike_manager` SET email='" +data["email"] +"', pwd='" +data["pwd"] +"', bm_name='" +data["bm_name"] +"', role='" +data["role"] +"' WHERE bm_id ='" +data["bm_id"] +"'"
+            result = self.sql.update_query(UPDATE_USER);
         except Exception as e:
-            return False
+            return e
         return True
