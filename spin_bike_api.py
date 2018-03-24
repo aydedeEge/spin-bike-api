@@ -16,6 +16,7 @@ from update_schedule import UpdateSchedule, RemoveSchedule
 from bike_logs import BikeLogs
 from maintenance import Maintenance
 from users import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser, ReturnUser, ReturnUserNamesAndIDs, CreateUser, EditUser
+from hardware import Hardware
 
 app = Flask(__name__)
 api = Api(app)
