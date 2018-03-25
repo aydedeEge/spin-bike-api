@@ -18,10 +18,9 @@ from bike_logs import BikeLogs
 from maintenance import Maintenance
 from users import EmailExists, EmailExistsOtherUser, NameExists, NameExistsOtherUser, ReturnUser, ReturnUserNamesAndIDs, CreateUser, EditUser
 from hardware import Hardware
-from image_transfer import UploadImage
+from image_transfer import UploadImage,LoadImage
 
-UPLOAD_FOLDER = './images/'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -43,6 +42,7 @@ api.add_resource(RemoveSchedule, '/delete_schedule')
 api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 api.add_resource(Maintenance, '/maintenance/<bm_id>')
 api.add_resource(UploadImage, '/upload_image')
+api.add_resource(LoadImage, '/get_all_images')
 #These route to users.py
 api.add_resource(ReturnUserNamesAndIDs, '/users/get_usernames_and_ids')
 api.add_resource(ReturnUser, '/users/get_user/<bm_id>')
