@@ -5,6 +5,9 @@ from flask_restful import Resource, request
 from SQLConnect import SQLConn
 from flask import jsonify
 from flask import send_file
+from PIL import Image
+from io import BytesIO
+import base64
 
 UPLOAD_FOLDER = 'images/'
 
@@ -14,22 +17,25 @@ class UploadImage(Resource):
         self.sql = SQLConn()
 
     def post(self):
-        file = request.files['image']
-        f = os.path.join(UPLOAD_FOLDER, file.filename)
-        file.save(f)
-        print(file.filename)
+        data = request.form['data']
+        data = json.loads(data)
+
+        data_file = data['base']
+
+        im = Image.open(BytesIO(base64.b64decode(data_file)))
+
+        im.save(UPLOAD_FOLDER + " image.gif")
         return True
+
 
 class LoadImage(Resource):
     def __init__(self):
         self.sql = SQLConn()
 
     def get(self):
-        f = []
-        for (dirpath, dirnames, filenames) in walk(UPLOAD_FOLDER):        
-            for image in filenames:
-                path = os.path.join(UPLOAD_FOLDER, image)
-                f.append(path)
-                break
+        with open(UPLOAD_FOLDER + " image.gif", "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+
+        js = json.dumps(encoded_string.decode('utf-8'))
         #only returns one random image for now
-        return send_file(f[0], mimetype='image/png')
+        return js
