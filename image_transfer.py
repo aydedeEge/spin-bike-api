@@ -42,6 +42,6 @@ class LoadImage(Resource):
 
             encoded_string = str(encoded_string)
             return encoded_string
-         except Exception as e:
+        except Exception as e:
             print(e)
             return False
