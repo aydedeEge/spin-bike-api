@@ -17,15 +17,18 @@ class UploadImage(Resource):
         self.sql = SQLConn()
 
     def post(self):
-        data = request.form['data']
-        data = json.loads(data)
+        try:
+            data = request.form['data']
+            data = json.loads(data)
+            data_file = data['base']
+            print(data_file)
+            im = Image.open(BytesIO(base64.b64decode(data_file)))
 
-        data_file = data['base']
-
-        im = Image.open(BytesIO(base64.b64decode(data_file)))
-
-        im.save(UPLOAD_FOLDER + " image.gif")
-        return True
+            im.save(UPLOAD_FOLDER + " image.gif")
+            return True
+        except Exception as e:
+            print(e)
+            return False
 
 
 class LoadImage(Resource):
@@ -33,9 +36,12 @@ class LoadImage(Resource):
         self.sql = SQLConn()
 
     def get(self):
-        with open(UPLOAD_FOLDER + " image.gif", "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read())
+        try:
+            with open(UPLOAD_FOLDER + " image.gif", "rb") as image_file:
+                encoded_string = base64.b64encode(image_file.read())
 
-        js = json.dumps(encoded_string.decode('utf-8'))
-        #only returns one random image for now
-        return js
+            encoded_string = str(encoded_string)
+            return encoded_string
+         except Exception as e:
+            print(e)
+            return False
