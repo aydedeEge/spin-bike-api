@@ -43,6 +43,7 @@ api.add_resource(BikeLogs, '/bikelogs/<start_date>&<end_date>')
 api.add_resource(Maintenance, '/maintenance/<bm_id>')
 api.add_resource(UploadImage, '/upload_image')
 api.add_resource(LoadImage, '/get_all_images')
+api.add_resource(Hardware, '/hardware')
 #These route to users.py
 api.add_resource(ReturnUserNamesAndIDs, '/users/get_usernames_and_ids')
 api.add_resource(ReturnUser, '/users/get_user/<bm_id>')
