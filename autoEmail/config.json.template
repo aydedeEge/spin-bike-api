@@ -1,0 +1,9 @@
+{
+    "host": "host",
+    "port": "port",
+    "user": "user",
+    "password": "password",
+    "db": "db",
+    "email_user": "email_user",
+    "email_pwd": "email_pwd"
+}
